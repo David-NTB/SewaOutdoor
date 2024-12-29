@@ -1,3 +1,5 @@
+package utils;
+
 public class Enums {
     public enum StatusTransaksi {
         PENDING,
@@ -6,7 +8,7 @@ public class Enums {
         CANCELED
     }
     
-    public static enum StatusProduk {
+    public static enum StatusBarang {
         AVAILABLE,
         RECOVERY,
         UNAVAILABLE
