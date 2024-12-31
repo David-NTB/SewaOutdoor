@@ -4,7 +4,7 @@ import databases.nodes.NodeTransaksi;
 import models.ModelTransaksi;
 import utils.Enums.StatusTransaksi;
 
-public class ListTransaksi {
+public class ListLaporan {
     NodeTransaksi head;
     NodeTransaksi tail;
 

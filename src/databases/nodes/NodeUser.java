@@ -5,10 +5,12 @@ import models.ModelUser;
 public class NodeUser {
     private ModelUser data;
     private NodeUser next;
+    private NodeUser prev;
 
     public NodeUser(ModelUser d) {
         data = d;
         next = null;
+        prev = null;
     }
 
     public ModelUser getData() {
@@ -26,5 +28,12 @@ public class NodeUser {
     public void setNext(NodeUser next) {
         this.next = next;
     }
-    
+
+    public NodeUser getPrev() {
+        return prev;
+    }
+
+    public void setPrev(NodeUser prev) {
+        this.prev = prev;
+    }    
 }

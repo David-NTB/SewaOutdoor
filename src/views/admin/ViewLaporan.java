@@ -1,6 +1,7 @@
 package views.admin;
 
 import controllers.ControllerBarang;
+import controllers.ControllerLaporan;
 import controllers.ControllerTransaksi;
 import controllers.ControllerUser;
 import databases.lists.ListBarang;
@@ -10,19 +11,21 @@ import models.ModelUser;
 import utils.Input;
 import utils.Enums.StatusTransaksi;
 
-public class ViewTransaksi {
+public class ViewLaporan {
     private ControllerUser controllerUser;
     private ControllerBarang controllerBarang;
-    private ControllerTransaksi controller;
+    private ControllerTransaksi controllerTransaksi;
+    private ControllerLaporan controller;
 
-    public ViewTransaksi(ControllerUser controllerUser, ControllerBarang controllerBarang,
-            ControllerTransaksi controller) {
+    public ViewLaporan(ControllerUser controllerUser, ControllerBarang controllerBarang,
+    ControllerTransaksi controllerTransaksi, ControllerLaporan controller) {
         this.controllerUser = controllerUser;
         this.controllerBarang = controllerBarang;
+        this.controllerTransaksi = controllerTransaksi;
         this.controller = controller;
     }
 
-    public void menuTransaksi() {
+    public void menuLaporan() {
         int ch = -1;
 
         while (ch != 0) {

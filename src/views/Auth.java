@@ -1,64 +1,54 @@
 package views;
 
-import controllers.ControllerAuth;
+import controllers.ControllerUser;
 import models.ModelUser;
 import utils.Input;
 import utils.Enums.Role;
 
 public class Auth {
-    final ControllerAuth controller = new ControllerAuth();
-    Dashboard dashboard;
+    final ControllerUser controller;
 
-    public void login() {
+    public Auth(ControllerUser controller) {
+        this.controller = controller;
+    }
+
+    public ModelUser login() {
         Input.cls();
-        String email, pass;
 
         System.out.println("==============================");
         System.out.println("          LOGIN MENU          ");
         System.out.println("==============================");
         System.out.print("Email       : ");
-        email = Input.readLine();
+        String email = Input.readLine();
         System.out.print("Password    : ");
-        pass = Input.readLine();
+        String pass = Input.readLine();
 
-        final ModelUser user = controller.cekLogin(email, pass);
+        ModelUser loginUser = controller.verifikasiLogin(email, pass);
 
-        if (user != null) {
-            Input.pressEnter();
-            dashboard = new Dashboard(user);
-        } else {
-            Input.pressEnter();
-        }
+        Input.pressEnter();
+
+        return loginUser;
     }
 
-    public void register() {
+    public ModelUser register() {
         Input.cls();
-        String nama, email, pass;
-        Role role;
 
         System.out.println("==============================");
         System.out.println("        REGISTER MENU         ");
         System.out.println("==============================");
         System.out.print("Nama        : ");
-        nama = Input.readLine();
+        String nama = Input.readLine();
         System.out.print("Email       : ");
-        email = Input.readLine();
+        String email = Input.readLine();
         System.out.print("Password    : ");
-        pass = Input.readLine();
+        String pass = Input.readLine();
         System.out.print("Role        : ");
-        role = Input.setRole();
+        Role role = Input.setRole();
 
-        final ModelUser user = controller.register(nama, email, pass, role);
+        ModelUser loginUser = controller.register(nama, email, pass, role);
 
-        if (user != null) {
-            Input.pressEnter();
-            dashboard = new Dashboard(user);
-        } else {
-            Input.pressEnter();
-        }
-    }
+        Input.pressEnter();
 
-    public Dashboard getDashboard() {
-        return dashboard;
+        return loginUser;
     }
 }

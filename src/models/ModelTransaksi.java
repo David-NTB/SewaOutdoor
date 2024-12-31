@@ -6,14 +6,14 @@ import utils.Enums.StatusTransaksi;
 public class ModelTransaksi {
     private int id;
     private ModelUser user;
-    private ListBarang listBarang;
+    private ListBarang listItem;
     private double totalHarga;
     private StatusTransaksi status;
 
-    public ModelTransaksi(int id, ModelUser user, double totalHarga, StatusTransaksi status) {
+    public ModelTransaksi(int id, ModelUser user, ListBarang listItem, double totalHarga, StatusTransaksi status) {
         this.id = id;
         this.user = user;
-        this.listBarang = new ListBarang();
+        this.listItem = listItem;
         this.totalHarga = totalHarga;
         this.status = status;
     }
@@ -35,11 +35,11 @@ public class ModelTransaksi {
     }
 
     public ListBarang getListBarang() {
-        return listBarang;
+        return listItem;
     }
 
-    public void setListBarang(ListBarang listBarang) {
-        this.listBarang = listBarang;
+    public void setListBarang(ListBarang listItem) {
+        this.listItem = listItem;
     }
 
     public double getTotalHarga() {
@@ -58,4 +58,15 @@ public class ModelTransaksi {
         this.status = status;
     }
 
+    public String info() {
+        String id = "ID Transaksi   : " + this.id;
+        String aa = "\n------------------------------\n";
+        String us = "User : \n" + this.user.info();
+        String bb = "\n------------------------------\n";
+        String lb = "List Barang : " + this.listItem.printItem(this.listItem);
+        String cc = "\n------------------------------\n";
+        String th = "Harga Total      : " + this.totalHarga + "\n";
+        String st = "Status Transaksi : " + this.status + "\n";
+        return id + aa + us + bb + lb + cc + th + st;
+    }
 }

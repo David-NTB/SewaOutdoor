@@ -1,27 +1,22 @@
 package views.admin;
 
-import java.util.Scanner;
-
 import controllers.ControllerUser;
-import databases.sources.SourceUser;
 import models.ModelUser;
+import utils.Input;
 import utils.Enums.Role;
 
 public class ViewUser {
-    int ch;
-    int id;
-    String nama;
-    String email;
-    String pass;
-    Role role;
-    ModelUser user;
-    String yn;
+    private ControllerUser controller;
 
-    Scanner input = new Scanner(System.in);
-    ControllerUser controller;
+    public ViewUser(ControllerUser controller) {
+        this.controller = controller;
+    }
 
-    public void menuUser() {
-        do {
+    public void menuUser(ModelUser loginUser) {
+        int ch = -1;
+
+        while (ch != 0) {
+            Input.cls();
 
             System.out.println("==============================");
             System.out.println("              USER            ");
@@ -34,8 +29,7 @@ public class ViewUser {
             System.out.println("0. Kembali");
 
             System.out.print("\nPilihan : ");
-            ch = input.nextInt();
-            input.nextLine();
+            ch = Input.readInt();
 
             switch (ch) {
                 case 1:
@@ -43,11 +37,11 @@ public class ViewUser {
                     break;
 
                 case 2:
-                    editUser();
+                    editUser(loginUser);
                     break;
 
                 case 3:
-                    deleteUser();
+                    deleteUser(loginUser);
                     break;
 
                 case 4:
@@ -64,111 +58,115 @@ public class ViewUser {
 
                 default:
                     System.out.println("\n[ Pilihan Tidak ada ]");
-                    input.nextLine();
+                    Input.pressEnter();
                     break;
             }
-        } while (ch != 0);
+        }
 
     }
 
     public void addUser() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("         TAMBAH USER          ");
         System.out.println("==============================");
         System.out.print("Nama     : ");
-        nama = input.nextLine();
+        String nama = Input.readLine();
         System.out.print("Email    : ");
-        email = input.nextLine();
+        String email = Input.readLine();
         System.out.print("Password : ");
-        pass = input.nextLine();
+        String pass = Input.readLine();
         System.out.print("Role     : ");
-        role = Role.ADMIN;
+        Role role = Input.setRole();
 
-        controller.addUser(id, nama, email, pass, role);
+        controller.addUser(0, nama, email, pass, role);
+
+        Input.pressEnter();
     }
 
-    public void editUser() {
+    public void editUser(ModelUser loginUser) {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("           EDIT USER          ");
         System.out.println("==============================");
         System.out.print("Masukkan ID : ");
-        id = input.nextInt();
-        input.nextLine();
+        int id = Input.readInt();
 
-        user = controller.idSearchUser(id);
+        ModelUser user = controller.idSearchUser(id);
 
-        System.out.print("Nama     : ");
-        nama = input.nextLine();
-        System.out.print("Email    : ");
-        email = input.nextLine();
-        System.out.print("Password : ");
-        pass = input.nextLine();
-        System.out.print("Role     : ");
-        role = Role.ADMIN;
-
-        do {
-            System.out.print("\nYakin ingin mengubah? (y/n) : ");
-            yn = input.nextLine();
-
-            if (yn.equals("y")) {
-                controller.editUser(user, nama, email, pass, role);;
-            } else if (yn.equals("n")) {
-                System.out.println("[ Operasi Dibatalkan ]");
-            } else {
-                System.out.println("Pilih y/n");
-            }
-        } while (!yn.equals("y") && !yn.equals("n"));
+        if (user != loginUser) {
+            if (user != null) {
+                System.out.print("\nNama     : ");
+                String nama = Input.readLine();
+                System.out.print("Email    : ");
+                String email = Input.readLine();
+                System.out.print("Password : ");
+                String pass = Input.readLine();
+                System.out.print("Role     : ");
+                Role role = Input.setRole();
         
+                controller.editUser(user, nama, email, pass, role);;
+            }
+        } else {
+            System.out.println("\n[ User Sedang Login ]");
+        }
+
+        Input.pressEnter();
     }
 
-    public void deleteUser() {
+    public void deleteUser(ModelUser loginUser) {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("          HAPUS USER          ");
         System.out.println("==============================");
         System.out.print("Masukkan ID : ");
-        id = input.nextInt();
-        input.nextLine();
+        int id = Input.readInt();
 
-        user = controller.idSearchUser(id);
+        ModelUser user = controller.idSearchUser(id);
 
-        do {
-            System.out.print("Yakin ingin menghapus? (y/n) : ");
-            yn = input.nextLine();
-
-            if (yn.equals("y")) {
+        if (user != loginUser) {
+            if (user != null) {
                 controller.deleteUser(user);
-            } else if (yn.equals("n")) {
-                System.out.println("[ Operasi Dibatalkan ]");
-            } else {
-                System.out.println("Pilih y/n");
             }
-        } while (!yn.equals("y") && !yn.equals("n"));
+        } else {
+            System.out.println("\n[ User Sedang Login ]");
+        }
 
+        Input.pressEnter();
     }
 
     public void cariUser() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("          CARI USER           ");
         System.out.println("==============================");
         System.out.print("Masukkan ID : ");
-        id = input.nextInt();
-        input.nextLine();
+        int id = Input.readInt();
 
-        user = controller.idSearchUser(id);
+        ModelUser user = controller.idSearchUser(id);
 
         controller.showUser(user);
+
+        Input.pressEnter();
     }
 
     public void semuaUser() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("          SEMUA USER          ");
         System.out.println("==============================");
 
         controller.showAllUser();
+
+        Input.pressEnter();
     }
 
-    public ControllerUser getcontroller(){
+    public ControllerUser getController() {
         return controller;
     }
-
 }

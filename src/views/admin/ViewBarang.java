@@ -1,59 +1,55 @@
 package views.admin;
 
-import java.util.Scanner;
-
 import controllers.ControllerBarang;
 import models.ModelBarang;
+import utils.Input;
 import utils.Enums.StatusBarang;
 
 public class ViewBarang {
-    int ch;
-    int id;
-    String nama;
-    double harga;
-    String kategori;
-    StatusBarang status;
-    ModelBarang service;
-    String yn;
+    private ControllerBarang controller;
 
-    Scanner input = new Scanner(System.in);
-    final ControllerBarang controller = new ControllerBarang();
+    public ViewBarang(ControllerBarang controller) {
+        this.controller = controller;
+    }
 
-    public void menuService() {
-        do {
+    public void menuBarang() {
+        int ch = -1;
+
+        while (ch != 0) {
+            Input.cls();
+
             System.out.println("==============================");
             System.out.println("            SERVICE           ");
             System.out.println("==============================");
-            System.out.println("1. Tambah Service");
-            System.out.println("2. Edit Service");
-            System.out.println("3. Hapus Service");
-            System.out.println("4. Cari Service");
-            System.out.println("5. Semua Service");
+            System.out.println("1. Tambah Barang");
+            System.out.println("2. Edit Barang");
+            System.out.println("3. Hapus Barang");
+            System.out.println("4. Cari Barang");
+            System.out.println("5. Semua Barang");
             System.out.println("0. Kembali");
 
             System.out.print("\nPilihan : ");
-            ch = input.nextInt();
-            input.nextLine();
+            ch = Input.readInt();
 
             switch (ch) {
                 case 1:
-                    addService();
+                    addBarang();
                     break;
 
                 case 2:
-                    editService();
+                    editBarang();
                     break;
 
                 case 3:
-                    deleteService();
+                    deleteBarang();
                     break;
 
                 case 4:
-                    cariService();
+                    cariBarang();
                     break;
 
                 case 5:
-                    semuaService();
+                    semuaBarang();
                     break;
 
                 case 0:
@@ -62,108 +58,98 @@ public class ViewBarang {
 
                 default:
                     System.out.println("\n[ Pilihan Tidak ada ]");
-                    input.nextLine();
+                    Input.pressEnter();
                     break;
             }
-
-        } while (ch != 0);
+        }
     }
 
-    public void addService() {
+    public void addBarang() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("       TAMBAH SERVICE         ");
         System.out.println("==============================");
         System.out.print("Nama     : ");
-        nama = input.nextLine();
+        String nama = Input.readLine();
         System.out.print("Harga    : ");
-        harga = input.nextInt();
-        input.nextLine();
-        System.out.print("Kategori : ");
-        kategori = input.nextLine();
+        double harga = Input.readDouble();
         System.out.print("Status   : ");
-        status = StatusBarang.AVAILABLE;
+        StatusBarang status = Input.setStatusBarang();
 
-        controller.addBarang(id, nama, harga, status);
+        controller.addBarang(0, nama, harga, status);
+
+        Input.pressEnter();
     }
 
-    public void editService() {
+    public void editBarang() {
+        Input.cls();
+
         System.out.println("==============================");
-        System.out.println("         EDIT SERVICE         ");
+        System.out.println("          EDIT BARANG         ");
         System.out.println("==============================");
         System.out.print("Masukkan ID : ");
-        id = input.nextInt();
-        input.nextLine();
+        int id = Input.readInt();
 
-        service = controller.searchBarang(id);
+        ModelBarang barang = controller.idSearchBarang(id);
 
-        System.out.print("Nama     : ");
-        nama = input.nextLine();
-        System.out.print("Harga    : ");
-        harga = input.nextInt();
-        input.nextLine();
-        System.out.print("Kategori : ");
-        kategori = input.nextLine();
-        System.out.print("Status   : ");
-        status = StatusBarang.AVAILABLE;
+        if (barang != null) {
+            System.out.print("\nNama     : ");
+            String nama = Input.readLine();
+            System.out.print("Harga    : ");
+            double harga = Input.readDouble();
+            System.out.print("Status   : ");
+            StatusBarang statusBarang = Input.setStatusBarang();
 
-        do {
-            System.out.print("\nYakin ingin mengubah? (y/n) : ");
-            yn = input.nextLine();
-
-            if (yn.equals("y")) {
-                controller.editBarang(service, nama, harga, status);
-            } else if (yn.equals("n")) {
-                System.out.println("[ Operasi Dibatalkan ]");
-            } else {
-                System.out.println("Pilih y/n");
-            }
-        } while (!yn.equals("y") && !yn.equals("n"));
-
+            controller.editBarang(barang, nama, harga, statusBarang);
+        }
+        Input.pressEnter();
     }
 
-    public void deleteService() {
+    public void deleteBarang() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("         HAPUS SERVICE        ");
         System.out.println("==============================");
         System.out.print("Masukkan ID : ");
-        id = input.nextInt();
-        input.nextLine();
+        int id = Input.readInt();
 
-        service = controller.searchBarang(id);
+        ModelBarang barang = controller.idSearchBarang(id);
 
-        do {
-            System.out.print("Yakin ingin menghapus? (y/n) : ");
-            yn = input.nextLine();
+        if (barang != null) {
+            controller.deleteBarang(barang);
+        }
 
-            if (yn.equals("y")) {
-                controller.deleteBarang(service);
-            } else if (yn.equals("n")) {
-                System.out.println("[ Operasi Dibatalkan ]");
-            } else {
-                System.out.println("Pilih y/n");
-            }
-        } while (!yn.equals("y") && !yn.equals("n"));
+        Input.pressEnter();
     }
 
-    public void cariService() {
+    public void cariBarang() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("         CARI SERVICE         ");
         System.out.println("==============================");
         System.out.print("Masukkan ID : ");
-        id = input.nextInt();
-        input.nextLine();
+        int id = Input.readInt();
 
-        service = controller.searchBarang(id);
+        ModelBarang barang = controller.idSearchBarang(id);
 
-        controller.showBarang(service);
+        controller.showBarang(barang);
+
+        Input.pressEnter();
     }
 
-    public void semuaService() {
+    public void semuaBarang() {
+        Input.cls();
+
         System.out.println("==============================");
         System.out.println("         SEMUA SERVICE        ");
         System.out.println("==============================");
 
         controller.showAllBarang();
+
+        Input.pressEnter();
     }
 
 }

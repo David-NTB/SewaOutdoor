@@ -28,6 +28,15 @@ public class Input {
         }
     }
 
+    public static double readDouble() {
+        try {
+            return Double.parseDouble(input.readLine());
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("\n[ Input Salah ]");
+            return -1;
+        }
+    }
+
     public static void closeInput() {
         try {
             input.close();

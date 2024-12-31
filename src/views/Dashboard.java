@@ -9,22 +9,26 @@ import views.admin.ViewTransaksi;
 import views.admin.ViewUser;
 
 public class Dashboard {
-    final ViewUser user = new ViewUser();
-    final ViewBarang service = new ViewBarang();
-    final ViewTransaksi transaksi = new ViewTransaksi();
-    final ViewPayment payment = new ViewPayment();
-
     private ModelUser loginUser;
+    private ViewUser viewUser;
+    private ViewBarang viewBarang;
+    private ViewTransaksi viewTransaksi;
 
-    public Dashboard(ModelUser loginUser) {
+    public Dashboard(
+            ModelUser loginUser,
+            ViewUser viewUser,
+            ViewBarang viewBarang,
+            ViewTransaksi viewTransaksi) {
+
         this.loginUser = loginUser;
+        this.viewUser = viewUser;
+        this.viewBarang = viewBarang;
+        this.viewTransaksi = viewTransaksi;
 
-        if (loginUser.getRole() == Role.ADMIN) {
-            dashboardAdmin();
-
-        } else if (loginUser.getRole() == Role.CUSTOMER) {
+        if (this.loginUser.getRole() == Role.CUSTOMER) {
             dashboardCustomer();
-
+        } else if (this.loginUser.getRole() == Role.ADMIN) {
+            dashboardAdmin();
         } else {
             System.out.println("[ Login Error ]");
         }
@@ -40,9 +44,10 @@ public class Dashboard {
             System.out.println("           DASHBOARD          ");
             System.out.println("==============================");
             System.out.println("1. Menu User");
-            System.out.println("2. Menu Service");
+            System.out.println("2. Menu Barang");
             System.out.println("3. Menu Transaksi");
             System.out.println("4. Menu Payment");
+            System.out.println("9. Login Info");
             System.out.println("0. Logout");
 
             System.out.print("\nPilihan : ");
@@ -50,19 +55,19 @@ public class Dashboard {
 
             switch (ch) {
                 case 1:
-                    user.menuUser();
+                    viewUser.menuUser(loginUser);
                     break;
 
                 case 2:
-                    service.menuService();
+                    viewBarang.menuBarang();
                     break;
 
                 case 3:
-                    transaksi.menuTransaksi();
+                    viewTransaksi.menuTransaksi();
                     break;
 
                 case 4:
-                    payment.menuPayment();
+                    // payment.menuPayment();
                     break;
 
                 case 9:
@@ -84,7 +89,7 @@ public class Dashboard {
 
     public void dashboardCustomer() {
         int ch;
-        
+
         do {
             Input.cls();
 
@@ -102,19 +107,19 @@ public class Dashboard {
 
             switch (ch) {
                 case 1:
-                    user.menuUser();
+                    // viewUser.menuUser();
                     break;
 
                 case 2:
-                    service.menuService();
+                    viewBarang.menuBarang();
                     break;
 
                 case 3:
-                    transaksi.menuTransaksi();
+                    // transaksi.menuTransaksi();
                     break;
 
                 case 4:
-                    payment.menuPayment();
+                    // payment.menuPayment();
                     break;
 
                 case 9:
@@ -140,24 +145,8 @@ public class Dashboard {
         System.out.println("==============================");
         System.out.println("          LOGIN INFO          ");
         System.out.println("==============================");
-        user.getcontroller().showUser(loginUser);
+        viewUser.getController().showUser(loginUser);
 
         Input.pressEnter();
-    }
-
-    public ViewUser getUser() {
-        return user;
-    }
-
-    public ViewBarang getService() {
-        return service;
-    }
-
-    public ViewTransaksi getTransaksi() {
-        return transaksi;
-    }
-
-    public ViewPayment getPayment() {
-        return payment;
     }
 }

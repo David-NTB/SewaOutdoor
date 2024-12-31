@@ -1,19 +1,21 @@
 package controllers;
 
 import databases.lists.ListBarang;
+import databases.lists.ListLaporan;
 import databases.lists.ListTransaksi;
+import databases.sources.SourceLaporan;
 import databases.sources.SourceTransaksi;
 import models.ModelBarang;
 import models.ModelTransaksi;
 import models.ModelUser;
 import utils.Enums.StatusTransaksi;
 
-public class ControllerTransaksi {
-    SourceTransaksi sourceTransaksi = new SourceTransaksi();
-    ListTransaksi listTransaksi;
+public class ControllerLaporan {
+    SourceLaporan sourceLaporan = new SourceLaporan();
+    ListLaporan listLaporan;
 
-    public ControllerTransaksi(SourceTransaksi source) {
-        listTransaksi = source.getListTransaksi();
+    public ControllerLaporan(SourceLaporan source) {
+        listLaporan = source.getListLaporan();
     }
 
     public ModelTransaksi addTransaksi(int id, ModelUser user, ListBarang listItem, double totalHarga, StatusTransaksi status) {

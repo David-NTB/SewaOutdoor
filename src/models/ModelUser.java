@@ -6,24 +6,33 @@ public class ModelUser {
     private int id;
     private String nama;
     private String email;
-    private String password;
+    private String pass;
     private Enums.Role role;
 
-    public ModelUser(int id, String nama, String email, String password, Enums.Role role) {
+    public ModelUser(int id, String nama, String email, String pass, Enums.Role role) {
         this.id = id;
         this.nama = nama;
         this.email = email;
-        this.password = password;
+        this.pass = pass;
         this.role = role;
     }
 
     @Override
     public String toString() {
-        String id = "ID       : " + this.id + "\n";
-        String nm = "Name     : " + this.nama + "\n";
-        String ps = "Password : " + this.password + "\n";
-        String em = "Email    : " + this.email + "\n";
-        String rl = "Role     : " + this.role + "\n";
+        String id = this.id + "\t";
+        String nm = this.nama + "\t";
+        String ps = this.pass + "\t";
+        String em = this.email + "\t";
+        String rl = this.role + "\n";
+        return id + nm + ps + em + rl;
+    }
+
+    public String info() {
+        String id = "ID         : " + this.id + "\n";
+        String nm = "Nama       : " + this.nama + "\n";
+        String ps = "Password   : " + this.pass + "\n";
+        String em = "Email      : " + this.email + "\n";
+        String rl = "Role       : " + this.role + "\n";
         return id + nm + ps + em + rl;
     }
 
@@ -44,11 +53,11 @@ public class ModelUser {
     }
 
     public String getPassword() {
-        return password;
+        return pass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String pass) {
+        this.pass = pass;
     }
 
     public String getEmail() {

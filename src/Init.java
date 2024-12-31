@@ -1,6 +1,9 @@
 import controllers.*;
 import databases.*;
 import databases.lists.ListUser;
+import databases.sources.SourceBarang;
+import databases.sources.SourceLaporan;
+import databases.sources.SourceTransaksi;
 import databases.sources.SourceUser;
 import models.*;
 import utils.Enums.Role;
@@ -8,34 +11,43 @@ import views.*;
 import views.admin.*;
 
 public class Init {
-    // Controllers
-    public ControllerAuth controllerAuth;
+    // // Controllers
+    public ControllerUser controllerUser;
     public ControllerBarang controllerBarang;
     public ControllerTransaksi controllerTransaksi;
-    public ControllerUser controllerUser;
+    public ControllerLaporan controllerLaporan;
 
     // Views
-    public Auth auth;
+    public ViewUser viewUser;
     public ViewBarang viewBarang;
     public ViewTransaksi viewTransaksi;
-    public ViewUser viewUser;
+    public ViewLaporan viewLapaoran;
 
     // Datasources
     public SourceUser sourceUser;
+    public SourceBarang sourceBarang;
+    public SourceTransaksi sourceTransaksi;
+    public SourceLaporan sourceLaporan;
     
-    public Init(
-        
-    ) {
-        // Views
-        auth = new Auth();
-        viewBarang = new ViewBarang();
-        viewTransaksi = new ViewTransaksi();
-        viewUser = new ViewUser();
-
-        // Databases
+    public Init() {
+        // Buat database
         sourceUser = new SourceUser();
+        sourceBarang = new SourceBarang();
+        sourceTransaksi = new SourceTransaksi();
+        sourceLaporan = new SourceLaporan();
+
+        // Buat controller
+        controllerUser = new ControllerUser(sourceUser);
+        controllerBarang = new ControllerBarang(sourceBarang);
+        controllerTransaksi = new ControllerTransaksi(sourceTransaksi);
+        controllerLaporan = new ControllerLaporan(sourceLaporan);
     }
+
+    // Isi database
     public void insertDatasource(){
         sourceUser.insertDataUser();
+        sourceBarang.insertDataBarang();
+        sourceTransaksi.insertDataTransaksi();
+        sourceLaporan.insertDataLaporan();
     }
 }

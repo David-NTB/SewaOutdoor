@@ -11,16 +11,16 @@ public class SourceUser {
         listUser.insert(
                 new ModelUser(
                         1,
-                        "asd",
-                        "asd",
-                        "asd",
+                        "Admin",
+                        "admin@admin.com",
+                        "admin123",
                         Role.ADMIN));
         listUser.insert(
                 new ModelUser(
                         2,
-                        "qwe",
-                        "qwe",
-                        "qwe",
+                        "Bawean",
+                        "davidntb7000@gmail.com",
+                        "david007",
                         Role.CUSTOMER));
     }
 

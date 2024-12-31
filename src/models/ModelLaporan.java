@@ -2,14 +2,14 @@ package models;
 
 import java.time.LocalDateTime;
 
-import databases.nodes.NodeTransaksi;
+import databases.lists.ListTransaksi;
 
 public class ModelLaporan {
     private int id;
     private LocalDateTime dateTime;
-    private NodeTransaksi transaksi;
+    private ListTransaksi transaksi;
     
-    public ModelLaporan(int id, LocalDateTime dateTime, NodeTransaksi transaksi) {
+    public ModelLaporan(int id, LocalDateTime dateTime, ListTransaksi transaksi) {
         this.id = id;
         this.dateTime = dateTime;
         this.transaksi = transaksi;
@@ -23,11 +23,11 @@ public class ModelLaporan {
         this.id = id;
     }
 
-    public NodeTransaksi getTransaksi() {
+    public ListTransaksi getTransaksi() {
         return transaksi;
     }
 
-    public void setTransaksi(NodeTransaksi transaksi) {
+    public void setTransaksi(ListTransaksi transaksi) {
         this.transaksi = transaksi;
     }
 

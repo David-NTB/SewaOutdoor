@@ -17,10 +17,18 @@ public class ModelBarang {
 
     @Override
     public String toString() {
-        String id = "ID       : " + this.id + "\n";
-        String nm = "Name     : " + this.nama + "\n";
-        String hr = "Harga    : " + this.harga + "\n";
-        String st = "Status   : " + this.status + "\n";
+        String id = this.id + "\t";
+        String nm = this.nama + "\t";
+        String hr = this.harga + "\t";
+        String st = this.status + "\n";
+        return id + nm + hr + st;
+    }
+
+    public String info() {
+        String id = "ID         : " + this.id + "\n";
+        String nm = "Nama       : " + this.nama + "\n";
+        String hr = "Harga      : " + this.harga + "\n";
+        String st = "Status     : " + this.status + "\n";
         return id + nm + hr + st;
     }
 
