@@ -1,17 +1,12 @@
 import controllers.*;
-import databases.*;
-import databases.lists.ListUser;
 import databases.sources.SourceBarang;
 import databases.sources.SourceLaporan;
 import databases.sources.SourceTransaksi;
 import databases.sources.SourceUser;
-import models.*;
-import utils.Enums.Role;
-import views.*;
 import views.admin.*;
 
 public class Init {
-    // // Controllers
+    // Controllers
     public ControllerUser controllerUser;
     public ControllerBarang controllerBarang;
     public ControllerTransaksi controllerTransaksi;

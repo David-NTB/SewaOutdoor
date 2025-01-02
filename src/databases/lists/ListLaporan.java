@@ -1,19 +1,19 @@
 package databases.lists;
 
+import databases.nodes.NodeLaporan;
 import databases.nodes.NodeTransaksi;
-import models.ModelTransaksi;
-import utils.Enums.StatusTransaksi;
+import models.ModelLaporan;
 
 public class ListLaporan {
-    NodeTransaksi head;
-    NodeTransaksi tail;
+    NodeLaporan head;
+    NodeLaporan tail;
 
-    public NodeTransaksi getHead() {
+    public NodeLaporan getHead() {
         return head;
     }
 
-    public ModelTransaksi insert(ModelTransaksi data) {
-        NodeTransaksi nn = new NodeTransaksi(data);
+    public ModelLaporan insert(ModelLaporan data) {
+        NodeLaporan nn = new NodeLaporan(data);
 
         if (tail == null) {
             nn.getData().setId(1);
@@ -27,24 +27,14 @@ public class ListLaporan {
         return nn.getData();
     }
 
-    public void setStatusCancel(ModelTransaksi data) {
-            NodeTransaksi current = head;
-            while (current != null) {
-                if (current.getData() == data) {
-                    current.getData().setStatus(StatusTransaksi.CANCELED);
-                }
-                current = current.getNext();
-        }
-    }
-
-    public ModelTransaksi searchId(int data) {
+    public ModelLaporan idSearchLaporan(int data) {
         if (head == null) {
             return null;
         } else {
             if (head.getData().getId() == data) {
                 return head.getData();
             } else {
-                NodeTransaksi current = head;
+                NodeLaporan current = head;
                 while (current != null) {
                     if (current.getData().getId() == data) {
                         return current.getData();
@@ -57,7 +47,7 @@ public class ListLaporan {
     }
 
     public void printList() {
-        NodeTransaksi current = head;
+        NodeTransaksi current = head.getData().getTransaksi().head;
         while (current != null) {
             System.out.print("\n" + current.getData().info());
             if (current.getNext() != null) {
@@ -67,4 +57,11 @@ public class ListLaporan {
         }
     }
 
+    public void printAll() {
+        NodeLaporan current = head;
+        while (current != null) {
+            System.out.println("\n" + current.getData().infoo());
+            current = current.getNext();
+        }
+    }
 }

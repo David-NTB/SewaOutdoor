@@ -12,6 +12,14 @@ public class ListTransaksi {
         return head;
     }
 
+    public void setHead(NodeTransaksi head) {
+        this.head = head;
+    }
+
+    public void setTail(NodeTransaksi tail) {
+        this.tail = tail;
+    }
+
     public ModelTransaksi insert(ModelTransaksi data) {
         NodeTransaksi nn = new NodeTransaksi(data);
 
@@ -37,7 +45,7 @@ public class ListTransaksi {
         }
     }
 
-    public ModelTransaksi searchId(int data) {
+    public ModelTransaksi idSearchTransaksi(int data) {
         if (head == null) {
             return null;
         } else {
@@ -56,15 +64,34 @@ public class ListTransaksi {
         }
     }
 
-    public void printList() {
+    public String printList() {
         NodeTransaksi current = head;
+        String output = "";
         while (current != null) {
-            System.out.print("\n" + current.getData().info());
+            output += "\n" + current.getData().info();
             if (current.getNext() != null) {
-                System.out.print("\n##############################\n");
+                output += "\n##############################\n";
             }
             current = current.getNext();
         }
+        return output;
     }
 
+    public String printStatus(StatusTransaksi statusTransaksi) {
+        NodeTransaksi current = head;
+        String output = "";
+        while (current != null && current.getData().getStatus() == statusTransaksi) {
+            output += "\n" + current.getData().info();
+            if (current.getNext() != null) {
+                output += "\n##############################\n";
+            }
+            current = current.getNext();
+        }
+        return output;
+    }
+
+    public void clearTransaksi() {
+        head = null;
+        tail = null;
+    }
 }

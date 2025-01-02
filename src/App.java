@@ -31,8 +31,7 @@ public class App {
         this.viewBarang = new ViewBarang(this.init.controllerBarang);
         this.viewTransaksi = new ViewTransaksi(this.init.controllerUser, this.init.controllerBarang,
         this.init.controllerTransaksi);
-        this.viewLaporan = new ViewLaporan(this.init.controllerUser, this.init.controllerBarang,
-        this.init.controllerTransaksi, this.init.controllerLaporan);
+        this.viewLaporan = new ViewLaporan(this.init.controllerTransaksi, this.init.controllerLaporan);
     }
 
     public void homePage() {
@@ -41,7 +40,7 @@ public class App {
             int ch;
 
             System.out.println("==============================");
-            System.out.println("           TRAVELIKU          ");
+            System.out.println("          Sewa Outdoor        ");
             System.out.println("==============================");
             System.out.println("1. Login");
             System.out.println("2. Register");
@@ -60,7 +59,7 @@ public class App {
                         System.out.println("[ Login Gagal ]");
                     } else {
                         System.out.println("[ Login Berhasil ]");
-                        new Dashboard(loginUser, viewUser, viewBarang, viewTransaksi);
+                        new Dashboard(loginUser, viewUser, viewBarang, viewTransaksi, viewLaporan);
                     }
                     break;
 
@@ -70,7 +69,7 @@ public class App {
                         System.out.println("[ Register Gagal ]");
                     } else {
                         System.out.println("[ Register Berhasil ]");
-                        new Dashboard(loginUser, viewUser, viewBarang, viewTransaksi);
+                        new Dashboard(loginUser, viewUser, viewBarang, viewTransaksi, viewLaporan);
                     }
                     break;
 

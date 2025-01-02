@@ -32,10 +32,9 @@ public class ViewTransaksi {
             System.out.println("           TRANSAKSI          ");
             System.out.println("==============================");
             System.out.println("1. Tambah Transaksi");
-            System.out.println("2. Tambah Transaksi");
-            System.out.println("3. Batalkan Transaksi");
-            System.out.println("4. Cari Transaksi");
-            System.out.println("5. Semua Transaksi");
+            System.out.println("2. Batalkan Transaksi");
+            System.out.println("3. Cari Transaksi");
+            System.out.println("4. Semua Transaksi");
             System.out.println("0. Kembali");
 
             System.out.print("\nPilihan : ");
@@ -47,18 +46,14 @@ public class ViewTransaksi {
                     break;
 
                 case 2:
-                    verifikasiTransaksi();
-                    break;
-
-                case 3:
                     cancelTransaksi();
                     break;
 
-                case 4:
+                case 3:
                     searchTransaksi();
                     break;
 
-                case 5:
+                case 4:
                     historyTransaksi();
                     break;
 
@@ -155,10 +150,6 @@ public class ViewTransaksi {
         Input.pressEnter();
     }
 
-    public void verifikasiTransaksi() {
-        // MASIH BELUM YA GES YA...
-    }
-
     public void searchTransaksi() {
         Input.cls();
 
@@ -183,6 +174,18 @@ public class ViewTransaksi {
         System.out.println("==============================");
 
         controller.showAllTransaksi();
+
+        Input.pressEnter();
+    }
+
+    public void searchStatusTransaksi(StatusTransaksi statusTransaksi) {
+        Input.cls();
+
+        System.out.println("==============================");
+        System.out.println("        LIHAT TRANSAKSI       ");
+        System.out.println("==============================");
+
+        controller.showStatusTransaksi(statusTransaksi);
 
         Input.pressEnter();
     }

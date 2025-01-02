@@ -2,9 +2,10 @@ package views;
 
 import models.ModelUser;
 import utils.Enums.Role;
+import utils.Enums.StatusTransaksi;
 import utils.Input;
-import views.admin.ViewPayment;
 import views.admin.ViewBarang;
+import views.admin.ViewLaporan;
 import views.admin.ViewTransaksi;
 import views.admin.ViewUser;
 
@@ -13,17 +14,20 @@ public class Dashboard {
     private ViewUser viewUser;
     private ViewBarang viewBarang;
     private ViewTransaksi viewTransaksi;
+    private ViewLaporan viewLaporan;
 
     public Dashboard(
             ModelUser loginUser,
             ViewUser viewUser,
             ViewBarang viewBarang,
-            ViewTransaksi viewTransaksi) {
+            ViewTransaksi viewTransaksi,
+            ViewLaporan viewLaporan) {
 
         this.loginUser = loginUser;
         this.viewUser = viewUser;
         this.viewBarang = viewBarang;
         this.viewTransaksi = viewTransaksi;
+        this.viewLaporan = viewLaporan;
 
         if (this.loginUser.getRole() == Role.CUSTOMER) {
             dashboardCustomer();
@@ -46,7 +50,7 @@ public class Dashboard {
             System.out.println("1. Menu User");
             System.out.println("2. Menu Barang");
             System.out.println("3. Menu Transaksi");
-            System.out.println("4. Menu Payment");
+            System.out.println("4. Menu Laporan");
             System.out.println("9. Login Info");
             System.out.println("0. Logout");
 
@@ -67,7 +71,7 @@ public class Dashboard {
                     break;
 
                 case 4:
-                    // payment.menuPayment();
+                    viewLaporan.menuLaporan();
                     break;
 
                 case 9:
@@ -96,10 +100,11 @@ public class Dashboard {
             System.out.println("==============================");
             System.out.println("           CUSTOMER           ");
             System.out.println("==============================");
-            System.out.println("1. Menu User");
-            System.out.println("2. Menu Service");
-            System.out.println("3. Menu Transaksi");
-            System.out.println("4. Menu Payment");
+            System.out.println("1. Lihat Barang");
+            System.out.println("2. Buat Transaksi");
+            System.out.println("3. Transaksi Belum Dibayar");
+            System.out.println("4. Transaksi Berlangsung");
+            System.out.println("5. Transaksi Selesai");
             System.out.println("0. Logout");
 
             System.out.print("\nPilihan : ");
@@ -107,19 +112,23 @@ public class Dashboard {
 
             switch (ch) {
                 case 1:
-                    // viewUser.menuUser();
+                    viewBarang.semuaBarang();
                     break;
 
                 case 2:
-                    viewBarang.menuBarang();
+                    viewTransaksi.addTransaksi();
                     break;
 
                 case 3:
-                    // transaksi.menuTransaksi();
+                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.PENDING);
                     break;
 
                 case 4:
-                    // payment.menuPayment();
+                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.PENDING);
+                    break;
+
+                case 5:
+                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.PENDING);
                     break;
 
                 case 9:

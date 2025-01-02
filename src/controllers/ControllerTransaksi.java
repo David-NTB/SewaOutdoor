@@ -32,7 +32,7 @@ public class ControllerTransaksi {
 
 
     public ModelTransaksi idSearchTransaksi(int id) {
-        ModelTransaksi modelTransaksi = listTransaksi.searchId(id);
+        ModelTransaksi modelTransaksi = listTransaksi.idSearchTransaksi(id);
         if (modelTransaksi != null) {;
             System.out.println("\n[ Transaksi Ditemukan ]");
         } else {
@@ -60,8 +60,21 @@ public class ControllerTransaksi {
         if (listTransaksi.getHead() == null) {
             System.out.println("\n[ Transaksi Tidak Ditemukan ]");
         } else {
-            listTransaksi.printList();
+            System.out.println(listTransaksi.printList());
         }
-        
+    }
+
+    public void showStatusTransaksi(StatusTransaksi statusTransaksi) {
+        if (listTransaksi.getHead() == null) {
+            System.out.println("\n[ Transaksi Tidak Ditemukan ]");
+        } else {
+            System.out.println(listTransaksi.printList());
+        }
+    }
+
+    public ListTransaksi generateLaporan() {
+        ListTransaksi laporan = listTransaksi;
+        listTransaksi = sourceTransaksi.getListTransaksi();
+        return laporan;
     }
 }

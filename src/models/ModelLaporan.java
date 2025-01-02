@@ -39,4 +39,18 @@ public class ModelLaporan {
         this.dateTime = dateTime;
     }
 
+    public String info() {
+        String id = "ID Laporan      : " + this.id + "\n";
+        String dt = "Tanggal Laporan : " + this.dateTime + "\n";
+        String aa = "\n------------------------------\n";
+        String lt = "List Transaksi  : \n" + this.transaksi.printList();
+        return id + dt + aa + lt;
+    }
+
+    public String infoo() {
+        String id = "ID Laporan      : " + this.id + "\n";
+        String dt = "Tanggal Laporan : " + this.dateTime + "\n";
+        String aa = "\n------------------------------\n";
+        return id + dt + aa;
+    }
 }

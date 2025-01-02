@@ -1,15 +1,12 @@
 package controllers;
 
-import databases.lists.ListBarang;
+import java.time.LocalDateTime;
+
 import databases.lists.ListLaporan;
 import databases.lists.ListTransaksi;
 import databases.sources.SourceLaporan;
-import databases.sources.SourceTransaksi;
-import models.ModelBarang;
-import models.ModelTransaksi;
-import models.ModelUser;
-import utils.Enums.StatusTransaksi;
-
+import models.ModelLaporan;
+ 
 public class ControllerLaporan {
     SourceLaporan sourceLaporan = new SourceLaporan();
     ListLaporan listLaporan;
@@ -18,52 +15,43 @@ public class ControllerLaporan {
         listLaporan = source.getListLaporan();
     }
 
-    public ModelTransaksi addTransaksi(int id, ModelUser user, ListBarang listItem, double totalHarga, StatusTransaksi status) {
-        ModelTransaksi modelTransaksi =  listTransaksi.insert(new ModelTransaksi(id, user, listItem, totalHarga, status));
-        if (modelTransaksi == null) {
-            System.out.println("\n[ Transaksi Gagal Ditambahkan ]");
+    public ModelLaporan addLaporan(ListTransaksi listTransaksi){
+        ModelLaporan modelLaporan = listLaporan.insert(new ModelLaporan(0, getDateTime(), listTransaksi));
+        if (modelLaporan == null) {
+            System.out.println("\n[ Laporan Gagal Ditambahkan ]");
         } else {
-            System.out.println("\n[ Transaksi Ditambahkan ]");
+            System.out.println("\n[ Laporan Ditambahkan ]");
         }
-        return modelTransaksi;
+        return modelLaporan;
     }
 
-    public void addItemTransaksi(ModelTransaksi transaksi, ModelBarang newBarang) {
-        transaksi.getListBarang().insert(newBarang);
+    public LocalDateTime getDateTime(){
+        LocalDateTime dateTime = LocalDateTime.now();
+        return dateTime;
     }
 
-
-    public ModelTransaksi idSearchTransaksi(int id) {
-        ModelTransaksi modelTransaksi = listTransaksi.searchId(id);
-        if (modelTransaksi != null) {;
-            System.out.println("\n[ Transaksi Ditemukan ]");
+    public ModelLaporan idSearchLaporan(int id) {
+        ModelLaporan modelLaporan = listLaporan.idSearchLaporan(id);
+        if (modelLaporan != null) {;
+            System.out.println("\n[ Laporan Ditemukan ]");
         } else {
-            System.out.println("\n[ Transaksi Tidak Ditemukan ]");
+            System.out.println("\n[ Laporan Tidak Ditemukan ]");
         }
-        return modelTransaksi;
+        return modelLaporan;
         
     }
 
-    public void editStatusTransaksi(ModelTransaksi transaksi, StatusTransaksi status) {
-        transaksi.setStatus(status); // Salah
-    }
-
-    public void cancelTransaksi(ModelTransaksi transaksi) {
-        listTransaksi.setStatusCancel(transaksi);
-    }
-
-    public void showTransaksi(ModelTransaksi transaksi) {
-        if (transaksi != null) {
-            System.out.println(transaksi.info());
+    public void showLaporan(ModelLaporan modelLaporan){
+        if (listLaporan != null) {
+            System.out.println(modelLaporan.info());
         }
     }
 
-    public void showAllTransaksi() {
-        if (listTransaksi.getHead() == null) {
-            System.out.println("\n[ Transaksi Tidak Ditemukan ]");
-        } else {
-            listTransaksi.printList();
+    public void showAllLaporan() {
+        if (listLaporan == null) {
+            System.out.println("\n[ Laporan Tidak Ditemukan ]");
+        }else{
+            listLaporan.printAll();
         }
-        
     }
 }
