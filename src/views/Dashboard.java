@@ -124,11 +124,11 @@ public class Dashboard {
                     break;
 
                 case 4:
-                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.PENDING);
+                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.ONGOING);
                     break;
 
                 case 5:
-                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.PENDING);
+                    viewTransaksi.searchStatusTransaksi(StatusTransaksi.DONE);
                     break;
 
                 case 9:
