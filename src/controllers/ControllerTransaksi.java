@@ -50,6 +50,14 @@ public class ControllerTransaksi {
         listTransaksi.setStatusCancel(transaksi);
     }
 
+    public void accTransaksi(ModelTransaksi transaksi) {
+        listTransaksi.setStatusOngoing(transaksi);
+    }
+
+    public void doneTransaksi(ModelTransaksi transaksi) {
+        listTransaksi.setStatusDone(transaksi);
+    }
+
     public void showTransaksi(ModelTransaksi transaksi) {
         if (transaksi != null) {
             System.out.println(transaksi.info());
@@ -68,7 +76,7 @@ public class ControllerTransaksi {
         if (listTransaksi.getHead() == null) {
             System.out.println("\n[ Transaksi Tidak Ditemukan ]");
         } else {
-            System.out.println(listTransaksi.printList());
+            System.out.println(listTransaksi.printStatus(statusTransaksi));
         }
     }
 

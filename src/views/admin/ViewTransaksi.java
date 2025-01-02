@@ -32,9 +32,11 @@ public class ViewTransaksi {
             System.out.println("           TRANSAKSI          ");
             System.out.println("==============================");
             System.out.println("1. Tambah Transaksi");
-            System.out.println("2. Batalkan Transaksi");
-            System.out.println("3. Cari Transaksi");
-            System.out.println("4. Semua Transaksi");
+            System.out.println("2. Terima Transaksi");
+            System.out.println("3. Selesaikan Transaksi");
+            System.out.println("4. Batalkan Transaksi");
+            System.out.println("5. Cari Transaksi");
+            System.out.println("6. Semua Transaksi");
             System.out.println("0. Kembali");
 
             System.out.print("\nPilihan : ");
@@ -46,14 +48,22 @@ public class ViewTransaksi {
                     break;
 
                 case 2:
-                    cancelTransaksi();
+                    verifikasiTransaksi();
                     break;
 
                 case 3:
-                    searchTransaksi();
+                    completeTransaksi();
                     break;
 
                 case 4:
+                    cancelTransaksi();
+                    break;
+
+                case 5:
+                    searchTransaksi();
+                    break;
+
+                case 6:
                     historyTransaksi();
                     break;
 
@@ -186,6 +196,66 @@ public class ViewTransaksi {
         System.out.println("==============================");
 
         controller.showStatusTransaksi(statusTransaksi);
+
+        Input.pressEnter();
+    }
+
+    public void verifikasiTransaksi() {
+        Input.cls();
+
+        System.out.println("==============================");
+        System.out.println("      BATALKAN TRANSAKSI      ");
+        System.out.println("==============================");
+        System.out.print("Masukkan ID : ");
+        int id = Input.readInt();
+
+        ModelTransaksi modelTransaksi = controller.idSearchTransaksi(id);
+
+        if (modelTransaksi != null) {
+            System.out.print("\nYakin ingin terima transaksi? (y/n) : ");
+            String yn = Input.readLine();
+
+            if (yn.equals("y")) {
+                controller.accTransaksi(modelTransaksi);
+                System.out.println("\n[ Transaksi Diterima ]");
+
+            } else if (yn.equals("n")) {
+                System.out.println("\n[ Operasi Dibatalkan ]");
+
+            } else {
+                System.out.println("Pilih y/n");
+            }
+        }
+
+        Input.pressEnter();
+    }
+    
+    public void completeTransaksi() {
+        Input.cls();
+
+        System.out.println("==============================");
+        System.out.println("      BATALKAN TRANSAKSI      ");
+        System.out.println("==============================");
+        System.out.print("Masukkan ID : ");
+        int id = Input.readInt();
+
+        ModelTransaksi modelTransaksi = controller.idSearchTransaksi(id);
+
+        if (modelTransaksi != null) {
+            System.out.print("\nYakin ingin terima transaksi? (y/n) : ");
+            String yn = Input.readLine();
+
+            if (yn.equals("y")) {
+                controller.doneTransaksi(modelTransaksi);
+                System.out.println("\n[ Transaksi Diselesaikan ]");
+
+            } else if (yn.equals("n")) {
+                System.out.println("\n[ Operasi Dibatalkan ]");
+
+            } else {
+                System.out.println("Pilih y/n");
+            }
+        }
 
         Input.pressEnter();
     }

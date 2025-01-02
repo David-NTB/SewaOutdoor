@@ -45,6 +45,26 @@ public class ListTransaksi {
         }
     }
 
+    public void setStatusOngoing(ModelTransaksi data) {
+            NodeTransaksi current = head;
+            while (current != null) {
+                if (current.getData() == data) {
+                    current.getData().setStatus(StatusTransaksi.ONGOING);
+                }
+                current = current.getNext();
+        }
+    }
+
+    public void setStatusDone(ModelTransaksi data) {
+            NodeTransaksi current = head;
+            while (current != null) {
+                if (current.getData() == data) {
+                    current.getData().setStatus(StatusTransaksi.ONGOING);
+                }
+                current = current.getNext();
+        }
+    }
+
     public ModelTransaksi idSearchTransaksi(int data) {
         if (head == null) {
             return null;
